@@ -5,18 +5,27 @@ import ThemeSwitcher from './ThemeSwitcher';
 export default function Header({ name }) {
   return (
     <header className="py-6 border-b border-gray-200 dark:border-gray-800">
-      <div className="mx-10 flex items-center justify-between">
+      <div className="px-10 flex items-center justify-between">
         
-        <Link href="/">
-          <a className="flex items-center gap-3 group">
-            <Image src="/logo.png" alt="Logo" width={60} height={60} className="rounded-lg" />
-            <span className="text-xl font-bold dark:text-white">{name}</span>
-          </a>
+        <Link 
+          href="/" 
+          className="flex items-center gap-3 group focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-lg"
+        >
+          <Image 
+            src="/logo.png" 
+            alt={`Logo de ${name}`} 
+            width={60} 
+            height={60} 
+            className="rounded-lg shadow-sm group-hover:scale-105 transition-transform" 
+          />
+          <span className="text-xl font-bold dark:text-white group-hover:text-blue-500 transition-colors">
+            {name}
+          </span>
         </Link>
 
-        <div className="flex items-center gap-6">
+        <nav aria-label="Menu principal" className="flex items-center gap-6">
           <ThemeSwitcher />
-        </div>
+        </nav>
       </div>
     </header>
   );

@@ -8,10 +8,24 @@ export default function Footer({ copyrightText }) {
           © {year} {copyrightText}. Todos os direitos reservados.
         </p>
         
-        <div className="flex gap-6 text-sm text-gray-500 dark:text-gray-400">
-          <a href="https://github.com/danieleksantos" target="blank" className="hover:text-blue-500 transition">GitHub</a>
-          <a href="https://www.linkedin.com/in/danieleksantos/" target="blank" className="hover:text-blue-500 transition">LinkedIn</a>
-        </div>
+        <nav aria-label="Links sociais" className="flex gap-6 text-sm text-gray-500 dark:text-gray-400">
+          <a 
+            href="https://github.com/danieleksantos" 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            className="hover:text-blue-500 transition-colors"
+          >
+            GitHub
+          </a>
+          <a 
+            href="https://www.linkedin.com/in/danieleksantos/" 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            className="hover:text-blue-500 transition-colors"
+          >
+            LinkedIn
+          </a>
+        </nav>
       </div>
     </footer>
   );

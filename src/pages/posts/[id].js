@@ -1,5 +1,5 @@
 import { getGlobalData } from '../../../utils/global-data';
-import { getPostById } from '../../mdx-utils.js';
+import { getPostById } from '../../post-service.js'; 
 import Image from 'next/image';
 import Footer from '../../components/Footer';
 import Header from '../../components/Header';
@@ -7,6 +7,7 @@ import Layout, { GradientBackground } from '../../components/Layout';
 import SEO from '../../components/SEO';
 import Link from 'next/link';
 import ArrowIcon from '../../components/ArrowIcon';
+import ReactMarkdown from 'react-markdown'; 
 
 export default function PostPage({ post, globalData }) {
   if (!post) {
@@ -15,12 +16,22 @@ export default function PostPage({ post, globalData }) {
         <Header name={globalData.name} />
         <div className="text-center py-20">
           <h1 className="text-2xl font-bold">Post não encontrado.</h1>
-          <Link href="/"><a className="text-blue-500 underline mt-4 block">Voltar para a Home</a></Link>
+          <Link href="/" className="text-blue-500 underline mt-4 block">
+            Voltar para a Home
+          </Link>
         </div>
         <Footer copyrightText={globalData.footerText} />
       </Layout>
     );
   }
+
+  const formattedDate = post.created_at 
+    ? new Date(post.created_at).toLocaleDateString('pt-BR', {
+        day: '2-digit',
+        month: 'long',
+        year: 'numeric'
+      })
+    : null;
 
   return (
     <Layout>
@@ -32,23 +43,20 @@ export default function PostPage({ post, globalData }) {
 
       <main className="max-w-4xl mx-auto px-6 w-full mb-20">
         <div className="py-8">
-          <Link href="/">
-            <a className="flex items-center text-sm font-bold uppercase tracking-widest text-gray-500 hover:text-blue-500 dark:text-gray-400 dark:hover:text-blue-400 transition-colors group">
-              <ArrowIcon className="mr-2 rotate-180 group-hover:-translate-x-1 transition-transform w-4 h-4" />
-              Voltar
-            </a>
+          <Link 
+            href="/" 
+            className="flex items-center text-sm font-bold uppercase tracking-widest text-gray-500 hover:text-blue-500 dark:text-gray-400 dark:hover:text-blue-400 transition-colors group"
+          >
+            <ArrowIcon className="mr-2 rotate-180 group-hover:-translate-x-1 transition-transform w-4 h-4" />
+            Voltar
           </Link>
         </div>
 
         <article>
           <header className="mb-12">
-            {post.created_at && (
+            {formattedDate && (
               <time className="text-xs uppercase tracking-[0.3em] font-black text-blue-500 mb-4 block">
-                {new Date(post.created_at).toLocaleDateString('pt-BR', {
-                  day: '2-digit',
-                  month: 'long',
-                  year: 'numeric'
-                })}
+                {formattedDate}
               </time>
             )}
             
@@ -60,9 +68,10 @@ export default function PostPage({ post, globalData }) {
               <Image
                 src={post.image_url || '/logo.png'}
                 alt={post.title}
-                layout="fill"
-                objectFit={post.image_url ? "cover" : "contain"}
-                className={!post.image_url ? "opacity-20 dark:invert p-20" : ""}
+                fill
+                className={`${
+                  !post.image_url ? "opacity-20 dark:invert p-20" : ""
+                } object-cover rounded-3xl`}
                 priority 
               />
             </div>
@@ -75,10 +84,9 @@ export default function PostPage({ post, globalData }) {
           </header>
 
           <section className="prose prose-blue lg:prose-xl dark:prose-invert max-w-none">
-            <div 
-              className="drop-cap" 
-              dangerouslySetInnerHTML={{ __html: post.body }} 
-            />
+            <ReactMarkdown>
+              {post.body}
+            </ReactMarkdown>
           </section>
         </article>
       </main>
