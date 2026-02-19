@@ -1,11 +1,11 @@
 import Link from 'next/link';
-import { getPosts } from '../utils/mdx-utils';
+import { getPosts } from '../mdx-utils';
 
 import Footer from '../components/Footer';
 import Header from '../components/Header';
 import Layout, { GradientBackground } from '../components/Layout';
 import ArrowIcon from '../components/ArrowIcon';
-import { getGlobalData } from '../utils/global-data';
+import { getGlobalData } from '../../utils/global-data';
 import SEO from '../components/SEO';
 
 export default function Index({ posts, globalData }) {
@@ -62,7 +62,14 @@ export default function Index({ posts, globalData }) {
 export async function getServerSideProps() {
   const posts = await getPosts();
   const globalData = getGlobalData()
+  console.log("DADOS RECEBIDOS DO SUPABASE:", posts);
 
 
-  return { props: { posts, globalData } };
+  return {
+    props: {
+      posts: posts || [],
+      globalData
+    }
+  };
 }
+

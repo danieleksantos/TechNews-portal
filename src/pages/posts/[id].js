@@ -1,12 +1,9 @@
-import { getGlobalData } from '../../utils/global-data';
+import { getGlobalData } from '../../../utils/global-data';
 import {
-  getPostBySlug,
-} from '../../utils/mdx-utils';
+  getPostById,
+} from '../../mdx-utils.js';
 
-import { MDXRemote } from 'next-mdx-remote';
 import Head from 'next/head';
-import Link from 'next/link';
-import ArrowIcon from '../../components/ArrowIcon';
 import CustomLink from '../../components/CustomLink';
 import Footer from '../../components/Footer';
 import Header from '../../components/Header';
@@ -60,8 +57,7 @@ export default function PostPage({
 
 export const getServerSideProps = async ({ params }) => {
   const globalData = getGlobalData();
-  const posts = await getPostBySlug(params.id);
- 
+  const posts = await getPostById(params.id); 
 
   return {
     props: {
