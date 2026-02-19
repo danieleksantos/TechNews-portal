@@ -8,50 +8,43 @@ export function GradientBackground({ variant, className }) {
       [styles.colorBackground]: variant === 'large',
       [styles.colorBackgroundBottom]: variant === 'small',
     },
-    className
+    className,
+    'absolute pointer-events-none' // Garante que o fundo não bloqueie cliques nos botões
   );
 
   return <div className={classes} />;
 }
 
 export default function Layout({ children }) {
-  const setAppTheme = () => {
-    const darkMode = localStorage.getItem('theme') === 'dark';
-    const lightMode = localStorage.getItem('theme') === 'light';
+  
+  useEffect(() => {
+    // 1. Inicializa o tema baseado no LocalStorage ou Preferência do Sistema
+    const savedTheme = localStorage.getItem('theme');
+    const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
 
-    if (darkMode) {
+    if (savedTheme === 'dark' || (!savedTheme && systemPrefersDark)) {
       document.documentElement.classList.add('dark');
-    } else if (lightMode) {
+    } else {
       document.documentElement.classList.remove('dark');
     }
-    return;
-  };
 
-  const handleSystemThemeChange = () => {
-    var darkQuery = window.matchMedia('(prefers-color-scheme: dark)');
-
-    darkQuery.onchange = (e) => {
-      if (e.matches) {
-        document.documentElement.classList.add('dark');
-        localStorage.setItem('theme', 'dark');
-      } else {
-        document.documentElement.classList.remove('dark');
-        localStorage.setItem('theme', 'light');
+    // 2. Escuta mudanças no tema do sistema operacional em tempo real
+    const darkQuery = window.matchMedia('(prefers-color-scheme: dark)');
+    const handleChange = (e) => {
+      if (!localStorage.getItem('theme')) { // Só muda se o usuário não tiver escolhido manualmente
+        document.documentElement.classList.toggle('dark', e.matches);
       }
     };
-  };
 
-  useEffect(() => {
-    setAppTheme();
-  }, []);
-
-  useEffect(() => {
-    handleSystemThemeChange();
+    darkQuery.addEventListener('change', handleChange);
+    return () => darkQuery.removeEventListener('change', handleChange);
   }, []);
 
   return (
-    <div className="relative pb-24 overflow-hidden">
-      <div className="flex flex-col items-center max-w-2xl w-full mx-auto">
+    // Removido o overflow-hidden para permitir que o scroll funcione naturalmente com o Grid
+    <div className="relative min-h-screen">
+      {/* Ajustado de max-w-2xl para max-w-5xl para comportar o novo Grid e Header */}
+      <div className="flex flex-col max-w-5xl w-full mx-auto min-h-screen">
         {children}
       </div>
     </div>

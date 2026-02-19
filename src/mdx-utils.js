@@ -13,8 +13,14 @@ export const getPosts = async () => {
 export const getPostById = async (id) => {
     try {
         const { data } = await api.get(`/posts?id=eq.${id}&select=*`);
+
+        if (data && data.length > 0) {
+            return data[0];
+        }
+        
+        return null; 
     } catch (error) {
         console.error("Erro ao carregar post:", error);
-        return [];
+        return null;
     }
 };
