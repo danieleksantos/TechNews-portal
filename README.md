@@ -104,5 +104,5 @@ Este projeto foi desenvolvido aplicando fundamentos sólidos de engenharia de so
 </p>
 
 <div align="center">
-<p>Desenvolvido por <strong>Daniele . Santos</strong></p>
+<p>Desenvolvido por <strong>Daniele K. Santos</strong></p>
 </div>
