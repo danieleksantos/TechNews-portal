@@ -101,7 +101,7 @@ export default function Index({ posts = [], globalData = {} }) {
         </ul>
 
         {totalPages > 1 && (
-          <nav className="flex justify-center items-center gap-6 mb-20" aria-label="Navegação de páginas">
+          <nav className="flex justify-center items-center gap-6 mb-2" aria-label="Navegação de páginas">
             <button
               onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
               disabled={currentPage === 1}
