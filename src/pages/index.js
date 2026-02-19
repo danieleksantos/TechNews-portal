@@ -13,11 +13,11 @@ export default function Index({ posts = [], globalData = {} }) {
   const [currentPage, setCurrentPage] = useState(1);
   const postsPerPage = 6;
 
-  const sortedPosts = [...posts].sort((a, b) => {
-    return new Date(b.created_at) - new Date(a.created_at);
-  });
+  const sortedPosts = [...posts].sort((a, b) => 
+    new Date(b.created_at) - new Date(a.created_at)
+  );
 
- const indexOfLastPost = currentPage * postsPerPage;
+  const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
   const currentPosts = sortedPosts.slice(indexOfFirstPost, indexOfLastPost);
   const totalPages = Math.ceil(sortedPosts.length / postsPerPage);
@@ -37,7 +37,7 @@ export default function Index({ posts = [], globalData = {} }) {
             {blogTitle}
           </h1>
           <p className="text-center text-xl text-slate-600 dark:text-gray-300 max-w-2xl mx-auto font-medium">
-            Aqui você não perde as notícias mais quentes do mundo tech.
+            Confira as últimas atualizações do ecossistema de tecnologia.
           </p>
         </section>
 
