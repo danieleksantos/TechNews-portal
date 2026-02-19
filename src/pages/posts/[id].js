@@ -1,6 +1,6 @@
 import { getGlobalData } from '../../../utils/global-data';
 import { getPostById } from '../../mdx-utils.js';
-
+import Image from 'next/image'; // Importante para a performance
 import Footer from '../../components/Footer';
 import Header from '../../components/Header';
 import Layout, { GradientBackground } from '../../components/Layout';
@@ -30,22 +30,22 @@ export default function PostPage({ post, globalData }) {
       />
       <Header name={globalData.name} />
 
-      <main className="max-w-5xl mx-auto px-6 w-full mb-20">
-        {/* Botão de Voltar */}
-        <div className="mb-10">
+      <main className="max-w-4xl mx-auto px-6 w-full mb-20">
+        {/* Botão de Voltar Minimalista */}
+        <div className="py-8">
           <Link href="/">
-            <a className="flex items-center text-sm font-semibold text-blue-600 dark:text-blue-400 group">
-              <ArrowIcon className="mr-2 rotate-180 group-hover:-translate-x-1 transition-transform" />
-              Voltar para a lista
+            <a className="flex items-center text-sm font-bold uppercase tracking-widest text-gray-500 hover:text-blue-500 dark:text-gray-400 dark:hover:text-blue-400 transition-colors group">
+              <ArrowIcon className="mr-2 rotate-180 group-hover:-translate-x-1 transition-transform w-4 h-4" />
+              Voltar
             </a>
           </Link>
         </div>
 
-        {/* Cabeçalho do Post */}
         <article>
-          <header className="mb-12 border-b border-gray-100 dark:border-gray-800 pb-12">
+          <header className="mb-12">
+            {/* Tag de Data */}
             {post.created_at && (
-              <time className="text-sm uppercase tracking-widest font-bold opacity-50 mb-4 block">
+              <time className="text-xs uppercase tracking-[0.3em] font-black text-blue-500 mb-4 block">
                 {new Date(post.created_at).toLocaleDateString('pt-BR', {
                   day: '2-digit',
                   month: 'long',
@@ -53,20 +53,37 @@ export default function PostPage({ post, globalData }) {
                 })}
               </time>
             )}
-            <h1 className="text-4xl md:text-6xl font-bold dark:text-white mb-6 leading-tight">
+            
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold dark:text-white mb-8 leading-tight tracking-tighter">
               {post.title}
             </h1>
+
+            {/* Imagem de Capa Hero */}
+            <div className="relative w-full h-[300px] md:h-[500px] rounded-3xl overflow-hidden shadow-2xl mb-12">
+              <Image
+                src={post.image_url || '/logo.png'}
+                alt={post.title}
+                layout="fill"
+                objectFit={post.image_url ? "cover" : "contain"}
+                className={!post.image_url ? "opacity-20 dark:invert p-20" : ""}
+                priority // Carrega esta imagem primeiro por ser o topo da página (LCP)
+              />
+            </div>
+
+            {/* Subtítulo como um resumo destacado */}
             {post.description && (
-              <p className="text-xl md:text-2xl text-gray-600 dark:text-gray-400 leading-relaxed italic border-l-4 border-blue-500 pl-6">
+              <p className="text-xl md:text-2xl text-gray-600 dark:text-gray-300 leading-relaxed font-medium mb-10 pb-10 border-b border-gray-100 dark:border-gray-800">
                 {post.description}
               </p>
             )}
           </header>
 
-          {/* Conteúdo do Post com Tailwind Typography */}
-          <section className="prose prose-lg md:prose-xl dark:prose-dark max-w-none">
-            {/* Se o seu post.body vier como String HTML do Supabase: */}
-            <div dangerouslySetInnerHTML={{ __html: post.body }} />
+          {/* Conteúdo Principal */}
+          <section className="prose prose-blue lg:prose-xl dark:prose-invert max-w-none">
+            <div 
+              className="drop-cap" // Opcional: Estilo clássico para a primeira letra
+              dangerouslySetInnerHTML={{ __html: post.body }} 
+            />
           </section>
         </article>
       </main>

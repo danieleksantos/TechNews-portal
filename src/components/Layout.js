@@ -9,16 +9,15 @@ export function GradientBackground({ variant, className }) {
       [styles.colorBackgroundBottom]: variant === 'small',
     },
     className,
-    'absolute pointer-events-none' // Garante que o fundo não bloqueie cliques nos botões
+    'absolute pointer-events-none animate-gradient'
   );
 
   return <div className={classes} />;
 }
 
 export default function Layout({ children }) {
-  
+
   useEffect(() => {
-    // 1. Inicializa o tema baseado no LocalStorage ou Preferência do Sistema
     const savedTheme = localStorage.getItem('theme');
     const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
 
@@ -28,10 +27,9 @@ export default function Layout({ children }) {
       document.documentElement.classList.remove('dark');
     }
 
-    // 2. Escuta mudanças no tema do sistema operacional em tempo real
     const darkQuery = window.matchMedia('(prefers-color-scheme: dark)');
     const handleChange = (e) => {
-      if (!localStorage.getItem('theme')) { // Só muda se o usuário não tiver escolhido manualmente
+      if (!localStorage.getItem('theme')) {
         document.documentElement.classList.toggle('dark', e.matches);
       }
     };
@@ -41,10 +39,14 @@ export default function Layout({ children }) {
   }, []);
 
   return (
-    // Removido o overflow-hidden para permitir que o scroll funcione naturalmente com o Grid
-    <div className="relative min-h-screen">
-      {/* Ajustado de max-w-2xl para max-w-5xl para comportar o novo Grid e Header */}
-      <div className="flex flex-col max-w-5xl w-full mx-auto min-h-screen">
+    <div className="relative min-h-screen bg-slate-50 dark:bg-[#0a0a0a] transition-colors duration-500 overflow-x-hidden">
+
+      <GradientBackground
+        variant="large"
+        className="fixed top-0 left-1/2 -translate-x-1/2 w-full h-full opacity-40 dark:opacity-20 z-0"
+      />
+
+      <div className="relative z-10 flex flex-col min-h-screen w-full">
         {children}
       </div>
     </div>

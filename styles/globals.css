@@ -15,3 +15,26 @@ h6 {
 body {
   font-family: var(--font-secondary);
 }
+body {
+  @apply bg-[#F8FAFC] text-slate-900;
+}
+
+@keyframes mesh-animation {
+  0% {
+    transform: translateX(-50%) translateY(-10%) rotate(0deg) scale(1);
+    opacity: 0.3;
+  }
+  50% {
+    transform: translateX(-40%) translateY(10%) rotate(4deg) scale(1.2);
+    opacity: 0.6; 
+  }
+  100% {
+    transform: translateX(-50%) translateY(-10%) rotate(0deg) scale(1);
+    opacity: 0.3;
+  }
+}
+
+.animate-gradient {
+  animation: mesh-animation 8s ease-in-out infinite;
+  will-change: transform;
+}
