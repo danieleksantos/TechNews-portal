@@ -1,139 +1,103 @@
-![Netlify Next.js Blog Template designed by Bejamas](github-banner.svg)
+<div align="center">
+  <img src="/public/logo.png" alt="TechNews Logo" width="100"/>
 
-[![Deploy to Netlify Button](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/netlify-templates/nextjs-blog-theme)
+  # TechNews - Portal de Notícias Moderno
 
-A customizable blog starter using:
+  <p>
+    <strong>Portal de notícias tech focado em performance, SEO e acessibilidade, utilizando Next.js e MDX.</strong>
+  </p>
 
-- [Next.js](https://github.com/vercel/next.js) v12
-- [Tailwind](https://tailwindcss.com/) v3.0
-- Built-in [MDX](https://mdxjs.com/) v1 support
-- Includes modern design with dark & light themes
+<p>
+    <img src="https://img.shields.io/badge/Next.js-black?style=for-the-badge&logo=next.js" alt="Next.js">
+    <img src="https://img.shields.io/badge/React.js-blue?style=for-the-badge&logo=react" alt="React">
+    <img src="https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white" alt="Tailwind">
+    <img src="https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white" alt="Vercel">
+</p>
+</div>
 
-> 🎉 We’re really excited about the Bejamas + Netlify collaboration and we were going to celebrate it with some swag, but we realized we could put that money into supporting OSS and our ecosystem even more! After all, who needs another t-shirt or sticker?!
->
-> [Click this link](https://oss-form.netlify.app/) to vote for your favorite Open Source project!
+---
+## 🚀 Deploy 
 
-![Preview of blog theme. Author named Jay Doe and blog's name is "Next.js Blog Theme" with one blog post](nextjs-blog-theme-preview.png)
+O projeto está publicado e pode ser acessado no link abaixo:
 
-[Take a gander at the demo.](https://bejamas-nextjs-blog.netlify.app)
+- **Produção (Vercel):** [https://tech-news-portal.vercel.app](https://tech-news-portal.vercel.app)
+- **Status do Build:** Full Stack (Static Generation + SSR).
 
-[Click here to watch the template walkthrough!](https://www.youtube.com/watch?v=63QZHs259dY)
-
-## Table of Contents:
-
-- [Getting Started](#getting-started)
-  - [Setting Up Locally](#setting-up-locally)
-  - [Using the Wizard](#using-the-setup-wizard)
-- [Configuring the Blog](#configuring-the-blog)
-- [Adding New Posts](#adding-new-posts)
-- [Testing](#testing)
-  - [Included Default Testing](#included-default-testing)
-  - [Removing Renovate](#removing-renovate)
-  - [Removing Cypress](#removing-cypress)
-
-## Getting Started
 
 ---
 
-You can get started with this project in two ways: locally or using the [setup wizard](https://nextjs-wizard.netlify.app/).
+## Sobre o Projeto
 
-### Setting Up Locally
+O TechNews é um blog corporativo/pessoal desenvolvido para entregar conteúdo técnico com velocidade extrema. Ele utiliza o poder do **SSG (Static Site Generation)** do Next.js para garantir tempos de carregamento quase instantâneos.
 
-If you're doing it locally, start with clicking the [use this template](https://github.com/netlify-templates/nextjs-blog-theme/generate) button on GitHub. This will create a new repository with this template's files on your GitHub account. Once that is done, clone your new repository and navigate to it in your terminal.
+- **MDX Integration:** Notícias escritas em Markdown com componentes React integrados, permitindo posts ricos e dinâmicos.
+- **Paginação Dinâmica:** Sistema de navegação por páginas com scroll suave (UX) e persistência de estado.
+- **Dark Mode Nativo:** Suporte total a temas claro e escuro, respeitando a preferência do sistema do usuário ou seleção manual.
+- **Mobile-First & A11y:** Layout 100% responsivo construído com Tailwind CSS, garantindo acessibilidade (targets de clique otimizados e contraste).
+- **SEO Ready:** Meta tags dinâmicas para compartilhamento em redes sociais e indexação em motores de busca.
 
-From there, you can install the project's dependencies by running:
+## Tecnologias Utilizadas
 
-```shell
+- **Core:** Next.js (Page Router), React 18+.
+- **Estilização:** Tailwind CSS (Arquitetura utilitária).
+- **Processamento de Conteúdo:** `next-mdx-remote` para renderização de arquivos Markdown.
+- **Gestão de Imagens:** `next/image` com otimização automática e configuração de domínios seguros (Unsplash).
+
+---
+
+## Como rodar o projeto 
+
+### Opção: Localmente (Node.js)
+
+Siga os passos abaixo para clonar e rodar o portal na sua máquina:
+
+#### 1. Clone o repositório
+```bash
+git clone [https://github.com/seu-usuario/tech-news-portal.git](https://github.com/seu-usuario/tech-news-portal.git)
+cd tech-news-portal
+```
+
+### 2. Instale as dependências (Usando Yarn ou NPM)
+```bash
 yarn install
+# ou
+npm install
 ```
 
-Finally, you can run your project locally with:
-
-```shell
-yarn run dev
-```
-
-Open your browser and visit <http://localhost:3000>, your project should be running!
-
-### Using the Setup Wizard
-
-![Preview of Setup Wizard showing the initial page of a setup form](nextjs-setup-wizard.png)
-
-Through the [setup wizard](https://nextjs-wizard.netlify.app/), you can create your blog in a few clicks and deploy to Netlify.
-
-## Configuring the blog
-
-The config is based on environment variables to make it easy to integrate with any Jamstack platform, like Netlify.
-
-Here are the variables you can edit:
-| Variable | Description | Options
-| --- | --- | --- |
-| `BLOG_NAME` | the name of your blog, displayed below the avatar ||
-| `BLOG_TITLE` | the main header (`h1`) on the home page ||
-| `BLOG_FOOTER_TEXT`| the text in the footer ||
-| `BLOG_THEME` | the theme to pass to Tailwind | default |
-| `BLOG_FONT_HEADINGS` | the font-family for all HTML headings, from `h1` to `h6`| sans-serif (default), serif, monospace|
-| `BLOG_FONT_PARAGRAPHS` | the font-family for all other HTML elements | sans-serif (default), serif, monospace|
-
-All of the env variables can be configured through the [Wizard](https://nextjs-wizard.netlify.app/) or through setting the project's environment variables. You can do this in your Netlify dashaboard (Site settings/Build & deploy/Environment/Environment variables).
-
-https://user-images.githubusercontent.com/3611928/153997545-6dcdeef0-e570-49e7-93d6-ce0d393d16c9.mp4
-
-[alt: video walkthrough of editing env vars]
-
-If setting an environment variable isn't your cup of tea, the defaults can be changed in [`utils/global-data.js`](/utils/global-data.js). You can also remove the variables and hard code blog information where these variables are used in the code base.
-
-- `BLOG_THEME, BLOG_FONT_HEADINGS, & BLOG_FONT_PARAGRAPHS` are used in [`tailwind-preset.js`](tailwind-preset.js)
-- `BLOG_NAME, BLOG_TITLE, BLOG_FOOTER_TEXT` are used in [`pages/index.js`](pages/index.js) & [`pages/posts/[slug].js`](pages/posts/[slug].js) through the `globalData` object.
-
-## Adding new posts
-
-All posts are stored in `/posts` directory. To make a new post, create a new file with the [`.mdx` extension](https://mdxjs.com/).
-
-Since the posts are written in `MDX` format you can pass props and components. That means you can use [React components](https://reactjs.org/docs/components-and-props.html) inside your posts to make them more interactive. Learn more about how to do so in the [MDX docs on content](https://mdxjs.com/docs/using-mdx/#components).
-
-https://user-images.githubusercontent.com/3611928/152727802-102ec296-41c8-446d-93ed-922d11187073.mp4
-
-[alt: video walkthrough of adding a new blog post]
-
-## Testing
-
-### Included Default Testing
-
-We’ve included some tooling that helps us maintain these templates. This template currently uses:
-
-- [Renovate](https://www.mend.io/free-developer-tools/renovate/) - to regularly update our dependencies
-- [Cypress](https://www.cypress.io/) - to run tests against how the template runs in the browser
-- [Cypress Netlify Build Plugin](https://github.com/cypress-io/netlify-plugin-cypress) - to run our tests during our build process
-
-If your team is not interested in this tooling, you can remove them with ease!
-
-### Removing Renovate
-
-In order to keep our project up-to-date with dependencies we use a tool called [Renovate](https://github.com/marketplace/renovate). If you’re not interested in this tooling, delete the `renovate.json` file and commit that onto your main branch.
-
-### Removing Cypress
-
-For our testing, we use [Cypress](https://www.cypress.io/) for end-to-end testing. This makes sure that we can validate that our templates are rendering and displaying as we’d expect. By default, we have Cypress not generate deploy links if our tests don’t pass. If you’d like to keep Cypress and still generate the deploy links, go into your `netlify.toml` and delete the plugin configuration lines:
-
-```diff
-[[plugins]]
-  package = "netlify-plugin-cypress"
--  [plugins.inputs.postBuild]
--    enable = true
--
--  [plugins.inputs]
--    enable = false
-```
-
-If you’d like to remove the `netlify-plugin-cypress` build plugin entirely, you’d need to delete the entire block above instead. And then make sure sure to remove the package from the dependencies using:
-
+### 3. Execute em modo de desenvolvimento
 ```bash
-npm uninstall -D netlify-plugin-cypress
+yarn dev
+# ou
+npm run dev
 ```
 
-And lastly if you’d like to remove Cypress entirely, delete the entire `cypress` folder and the `cypress.config.ts` file. Then remove the dependency using:
+Abra o navegador em: http://localhost:3000
 
-```bash
-npm uninstall cypress
-```
+## Arquitetura e Boas Práticas
+
+Este projeto foi desenvolvido aplicando fundamentos sólidos de engenharia de software, foco constante do meu aprendizado:
+
+- Clean Code: Componentização clara e separação de lógica de dados (getServerSideProps) da UI.
+- SOLID: Princípios de responsabilidade única na organização de componentes (Headers, Footers, Layouts).
+- Estruturas de Dados: Ordenação cronológica inversa de posts e lógica de paginação otimizada para performance.
+- Otimização de Imagens: Configuração de remotePatterns para garantir segurança no carregamento de mídias externas.
+
+<br />
+
+<hr />
+
+## Preview
+
+<p align="center">Desktop Experience</p>
+<p align="center">
+<img src="https://github.com/user-attachments/assets/3df0e796-7c88-4946-afd9-cf323c823bc4" alt="Desktop Preview" width="700" /></p>
+
+<p align="center">Navegação e Responsividade</p>
+<p align="center">
+<img src="https://github.com/user-attachments/assets/8da5e941-425a-4c90-8f6f-ec15cbfaea06" alt="Mobile Dark" width="250" />
+<img src="https://github.com/user-attachments/assets/921e76b2-8a0a-48e0-89ab-1bedc03aa63f" alt="Mobile Preview" width="250" />
+</p>
+
+<div align="center">
+<p>Desenvolvido por <strong>Daniele . Santos</strong></p>
+</div>
