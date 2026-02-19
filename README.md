@@ -4,7 +4,7 @@
   # TechNews - Portal de Notícias do universo Tech
 
   <p>
-    <strong>Portal de notícias tech focado em performance, SEO e acessibilidade, utilizando Next.js e MDX.</strong>
+    <strong>Portal de notícias tech focado em performance, SEO e acessibilidade, utilizando Next.js e Supabase</strong>
   </p>
 
 <p>
