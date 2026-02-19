@@ -1,5 +1,5 @@
 import { getGlobalData } from '../../../utils/global-data';
-import { getPostById } from '../../post-service.js'; 
+import { getPostById } from '../../post-service.js';
 import Image from 'next/image';
 import Footer from '../../components/Footer';
 import Header from '../../components/Header';
@@ -7,7 +7,8 @@ import Layout, { GradientBackground } from '../../components/Layout';
 import SEO from '../../components/SEO';
 import Link from 'next/link';
 import ArrowIcon from '../../components/ArrowIcon';
-import ReactMarkdown from 'react-markdown'; 
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 
 export default function PostPage({ post, globalData }) {
   if (!post) {
@@ -25,12 +26,12 @@ export default function PostPage({ post, globalData }) {
     );
   }
 
-  const formattedDate = post.created_at 
+  const formattedDate = post.created_at
     ? new Date(post.created_at).toLocaleDateString('pt-BR', {
-        day: '2-digit',
-        month: 'long',
-        year: 'numeric'
-      })
+      day: '2-digit',
+      month: 'long',
+      year: 'numeric'
+    })
     : null;
 
   return (
@@ -43,8 +44,8 @@ export default function PostPage({ post, globalData }) {
 
       <main className="max-w-4xl mx-auto px-6 w-full mb-20">
         <div className="py-8">
-          <Link 
-            href="/" 
+          <Link
+            href="/"
             className="flex items-center text-sm font-bold uppercase tracking-widest text-gray-500 hover:text-blue-500 dark:text-gray-400 dark:hover:text-blue-400 transition-colors group"
           >
             <ArrowIcon className="mr-2 rotate-180 group-hover:-translate-x-1 transition-transform w-4 h-4" />
@@ -59,7 +60,7 @@ export default function PostPage({ post, globalData }) {
                 {formattedDate}
               </time>
             )}
-            
+
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold dark:text-white mb-8 leading-tight tracking-tighter">
               {post.title}
             </h1>
@@ -69,10 +70,9 @@ export default function PostPage({ post, globalData }) {
                 src={post.image_url || '/logo.png'}
                 alt={post.title}
                 fill
-                className={`${
-                  !post.image_url ? "opacity-20 dark:invert p-20" : ""
-                } object-cover rounded-3xl`}
-                priority 
+                className={`${!post.image_url ? "opacity-20 dark:invert p-20" : ""
+                  } object-cover rounded-3xl`}
+                priority
               />
             </div>
 
@@ -84,7 +84,7 @@ export default function PostPage({ post, globalData }) {
           </header>
 
           <section className="prose prose-blue lg:prose-xl dark:prose-invert max-w-none">
-            <ReactMarkdown>
+            <ReactMarkdown remarkPlugins={[remarkGfm]}>
               {post.body}
             </ReactMarkdown>
           </section>
